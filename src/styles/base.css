@@ -1,0 +1,57 @@
+@tailwind base;
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  font-stretch: 75% 125%;
+  src: url("../fonts/Poppins.woff2");
+}
+
+/* @layer base {
+  /* Text Styles */
+/*
+  h1 {
+    @apply text-2xl font-bold mb-4 text-purple-500; 
+  }
+  h2 {
+    @apply text-xl font-semibold mb-3 text-[#311432]; 
+  }
+  h3 {
+    @apply text-lg font-semibold mb-2 text-[#311432]; 
+  }
+  p {
+    @apply text-base mb-4 text-[#311432]; 
+  }
+  
+
+  
+  ul,
+  ol {
+    @apply list-disc ml-6 mb-4; 
+  }
+  li {
+    @apply mb-2; 
+  }
+
+  
+  a {
+    @apply text-purple-500; 
+  }
+
+  
+  button,
+  input[type="button"],
+  input[type="submit"] {
+    @apply px-4 py-2 rounded-md bg-[#702963] text-white font-semibold hover:bg-[#311432]; 
+  }
+
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    @apply w-full py-2 px-3 rounded-md border-gray-300 focus:outline-none focus:border-blue-500; 
+  }
+} */
