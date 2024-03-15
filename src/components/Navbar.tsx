@@ -121,10 +121,10 @@ function Navbar() {
       title: "Cart",
       link: "/cart",
     },
-    // {
-    //   title: "Studio",
-    //   link: "/studio",
-    // },
+    {
+      title: "Studio",
+      link: "/studio",
+    },
   ];
   const handleMobileMenuClick = () => {
     setShowMobileMenu(!showMobileMenu); // Toggle mobile menu visibility

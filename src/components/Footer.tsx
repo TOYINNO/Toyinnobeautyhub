@@ -113,22 +113,22 @@ const Footer = () => {
               </h2>
               <ul className="text-black dark:text-black font-medium">
                 <li className="mb-4">
-                  <Link href="#" className="hover:underline">
+                  <Link href="/privacy" className="hover:underline">
                     Privacy Policy
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="#" className="hover:underline">
+                  <Link href="/terms" className="hover:underline">
                     Terms &amp; Conditions
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <Link href="#" className="hover:underline">
+                  <Link href="/terms" className="hover:underline">
                     Shipping and Returns
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:underline">
+                  <Link href="/faqs" className="hover:underline">
                     FAQ
                   </Link>
                 </li>
@@ -149,28 +149,28 @@ const Footer = () => {
               </p>
               <div className="flex mt-4 sm:justify-center sm:mt-0">
                 <Link
-                  href="#"
+                  href="https://web.facebook.com/?_rdc=1&_rdr"
                   className="text-black hover:text-black dark:hover:text-white"
                 >
                   <AiOutlineFacebook className="w-8 h-6" />
                   <span className="sr-only">Facebook page</span>
                 </Link>
                 <Link
-                  href="#"
+                  href="https://twitter.com/home"
                   className="text-black hover:text-black dark:hover:text-white ms-5"
                 >
                   <AiOutlineTwitter className="w-8 h-6" />
                   <span className="sr-only">Twitter page</span>
                 </Link>
                 <Link
-                  href="#"
+                  href="https://discord.com/channels/@me"
                   className="text-black hover:text-black dark:hover:text-white ms-5"
                 >
                   <FaDiscord className="w-7 h-5" />
                   <span className="sr-only">Discord community</span>
                 </Link>
                 <Link
-                  href="#"
+                  href="https://github.com/toyinno"
                   className="text-black hover:text-black dark:hover:text-white ms-5"
                 >
                   <AiOutlineGithub className="w-8 h-6" />
