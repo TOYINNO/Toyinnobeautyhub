@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import logo from "@/assets/logo-no-background.png";
 import Image from "next/image";
@@ -19,6 +19,11 @@ interface Product {
   title: string;
   // Add more fields if necessary
 }
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  useCdn: true,
+});
 
 function PagesDropdown({ closeDropdown }: { closeDropdown: () => void }) {
   const handleDropdownClick = () => {
@@ -30,14 +35,12 @@ function PagesDropdown({ closeDropdown }: { closeDropdown: () => void }) {
         {" "}
         {/* Set text color to text-purple-800 */}
         <li>
-          <Link href="/about">
-            <Link
-              href="/about"
-              onClick={handleDropdownClick} // Close dropdown on click
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              About Us
-            </Link>
+          <Link
+            href="/about"
+            onClick={handleDropdownClick}
+            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            About Us
           </Link>
         </li>
         <li>
@@ -137,25 +140,24 @@ function Navbar() {
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
     useCdn: true,
   });
-  const search = async () => {
-    if (!searchQuery.trim()) return; // Skip if search query is empty
+  // Replace lines 142-155 with:
+  const search = useCallback(async () => {
+    if (!searchQuery.trim()) return;
 
     try {
-      // Perform search query using Sanity's GROQ language
       const query = `*[_type == 'product' && title match "${searchQuery}*"]`;
-
       const results = await client.fetch<Product[]>(query);
-
       setSearchResults(results);
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
-  };
-
+  }, [searchQuery, client]); // Add client to the dependency array
   // useEffect hook to trigger search when searchQuery changes
   useEffect(() => {
-    search();
-  }, [searchQuery]);
+    if (searchQuery.trim()) {
+      search();
+    }
+  }, [searchQuery, search]);
 
   useEffect(() => {
     // Close dropdown when search results are displayed
