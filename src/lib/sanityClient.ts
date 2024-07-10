@@ -7,12 +7,18 @@ const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? "2024-02-23";
 const token = process.env.SANITY_API_TOKEN;
 
 export const client = createClient({
-  projectId,
-  dataset,
+  projectId: projectId || "",
+  dataset: dataset || "",
   apiVersion,
   token,
   useCdn: process.env.NODE_ENV === "production",
 });
+
+if (!projectId || !dataset) {
+  throw new Error(
+    "Missing Sanity configuration. Check your environment variables."
+  );
+}
 
 const builder = imageUrlBuilder(client);
 
