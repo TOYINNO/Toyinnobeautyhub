@@ -15,12 +15,18 @@ interface Props {
 export const revalidate = 60;
 
 export const generateStaticParams = async () => {
-  const query = groq`*[_type == 'product']{
-        slug
+  try {
+    const query = groq`*[_type == 'product']{
+      slug
     }`;
-  const slugs: any = await client.fetch(query);
-  const slugRoutes = slugs.map((slug: any) => slug?.slug?.current);
-  return slugRoutes?.map((slug: string) => ({ slug }));
+    const slugs: any = await client.fetch(query);
+    console.log("Slugs fetched successfully:", slugs);
+    const slugRoutes = slugs.map((slug: any) => slug?.slug?.current);
+    return slugRoutes?.map((slug: string) => ({ slug }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    throw error;
+  }
 };
 
 const DailyDealsQuery = groq`*[_type == 'product' && position == 'On Sale']{
@@ -30,8 +36,24 @@ const DailyDealsQuery = groq`*[_type == 'product' && position == 'On Sale']{
 const SinglePage = async ({ params: { slug } }: Props) => {
   const query = groq`*[_type == 'product' && slug.current == $slug][0]{...}`;
 
-  const product: ProductProps = await client.fetch(query, { slug });
-  const DailyDealsProduct = await client.fetch(DailyDealsQuery);
+  let product: ProductProps;
+  let DailyDealsProduct;
+
+  try {
+    product = await client.fetch(query, { slug });
+    console.log("Product fetched successfully:", product);
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  }
+
+  try {
+    DailyDealsProduct = await client.fetch(DailyDealsQuery);
+    console.log("Daily deals fetched successfully:", DailyDealsProduct);
+  } catch (error) {
+    console.error("Error fetching daily deals:", error);
+    throw error;
+  }
 
   return (
     <Container className="my-10">
